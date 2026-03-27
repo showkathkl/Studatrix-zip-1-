@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import First from "./components/First";
 import Login from "./pages/Login";
@@ -43,118 +43,97 @@ import ParentAttendance from "./pages/parent/Attendance";
 import ParentProfile from "./pages/parent/Profile";
 import ParentLayout from "./pages/parent/ParentLayout";
 
-/* ✅ ADD THIS IMPORT */
 import Fee from "./pages/parent/Fee";
 
 
 function App() {
   return (
-    <BrowserRouter>
+    <Routes>
 
-      <Routes>
+      {/* HOME */}
+      <Route path="/" element={<First />} />
 
-        {/* HOME */}
-        <Route path="/" element={<First />} />
+      {/* LOGIN */}
+      <Route path="/login" element={<Login />} />
 
-        {/* LOGIN */}
-        <Route path="/login" element={<Login />} />
-
-        {/* REGISTER */}
-        <Route path="/register" element={<Register />} />
+      {/* REGISTER */}
+      <Route path="/register" element={<Register />} />
 
 
-
-        {/* SCHOLAR DASHBOARD */}
-        <Route
-          path="/scholar-dashboard"
-          element={
-            <ProtectedRoute allowedRole="scholar">
-              <Scholardashboard />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<Dashboard />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="academic-records" element={<AcademicRecords />} />
-          <Route path="attendance" element={<Attendance />} />
-          <Route path="fee-payments" element={<FeePayments />} />
-          <Route path="courses" element={<Courses />} />
-          <Route path="assignments" element={<Assignments />} />
-          <Route path="schedule" element={<Schedule />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
-
+      {/* SCHOLAR DASHBOARD */}
+      <Route
+        path="/scholar-dashboard"
+        element={
+          <ProtectedRoute allowedRole="scholar">
+            <Scholardashboard />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Dashboard />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="academic-records" element={<AcademicRecords />} />
+        <Route path="attendance" element={<Attendance />} />
+        <Route path="fee-payments" element={<FeePayments />} />
+        <Route path="courses" element={<Courses />} />
+        <Route path="assignments" element={<Assignments />} />
+        <Route path="schedule" element={<Schedule />} />
+        <Route path="settings" element={<Settings />} />
+      </Route>
 
 
-        {/* ADMIN DASHBOARD */}
-        <Route
-          path="/admin-dashboard"
-          element={
-            <ProtectedRoute allowedRole="admin">
-              <AdminDashboardLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<AdminHome />} />
-          <Route path="profile" element={<AdminProfile />} />
-          <Route path="students" element={<ManageStudents />} />
-          <Route path="teachers" element={<ManageTeachers />} />
-          <Route path="courses" element={<ManageCourses />} />
-          <Route path="reports" element={<Reports />} />
-          <Route path="settings" element={<AdminSettings />} />
-        </Route>
+      {/* ADMIN DASHBOARD */}
+      <Route
+        path="/admin-dashboard"
+        element={
+          <ProtectedRoute allowedRole="admin">
+            <AdminDashboardLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<AdminHome />} />
+        <Route path="profile" element={<AdminProfile />} />
+        <Route path="students" element={<ManageStudents />} />
+        <Route path="teachers" element={<ManageTeachers />} />
+        <Route path="courses" element={<ManageCourses />} />
+        <Route path="reports" element={<Reports />} />
+        <Route path="settings" element={<AdminSettings />} />
+      </Route>
 
 
-
-        {/* TEACHER DASHBOARD */}
-        <Route
-          path="/teacher-dashboard"
-          element={
-            <ProtectedRoute allowedRole="teacher">
-              <TeacherLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<TeacherDashboard />} />
-
-          <Route path="profile" element={<TeacherProfile />} />
-
-          <Route path="students" element={<Students />} />
-
-          <Route path="classes" element={<Classes />} />
-
-          <Route path="reports" element={<TeacherReports />} />
-        </Route>
+      {/* TEACHER DASHBOARD */}
+      <Route
+        path="/teacher-dashboard"
+        element={
+          <ProtectedRoute allowedRole="teacher">
+            <TeacherLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<TeacherDashboard />} />
+        <Route path="profile" element={<TeacherProfile />} />
+        <Route path="students" element={<Students />} />
+        <Route path="classes" element={<Classes />} />
+        <Route path="reports" element={<TeacherReports />} />
+      </Route>
 
 
+      {/* PARENT DASHBOARD */}
+      <Route
+        path="/parent-dashboard"
+        element={
+          <ProtectedRoute allowedRole="parent">
+            <ParentLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<ParentDashboard />} />
+        <Route path="children" element={<Children />} />
+        <Route path="attendance" element={<ParentAttendance />} />
+        <Route path="fee" element={<Fee />} />
+        <Route path="profile" element={<ParentProfile />} />
+      </Route>
 
-        {/* PARENT DASHBOARD */}
-        <Route
-          path="/parent-dashboard"
-          element={
-            <ProtectedRoute allowedRole="parent">
-              <ParentLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<ParentDashboard />} />
-
-          <Route path="children" element={<Children />} />
-
-          <Route path="attendance" element={<ParentAttendance />} />
-
-          {/* ✅ NEW FEE PAGE */}
-          <Route path="fee" element={<Fee />} />
-
-          <Route path="profile" element={<ParentProfile />} />
-
-        </Route>
-
-
-
-      </Routes>
-
-    </BrowserRouter>
+    </Routes>
   );
 }
 
